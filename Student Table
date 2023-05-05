@@ -1,0 +1,28 @@
+DROP table student; 
+CREATE TABLE student (
+    student_id INT PRIMARY KEY AUTO_INCREMENT, 
+    name VARCHAR(20),
+    major VARCHAR(20)
+);
+
+DESCRIBE student; 
+
+ALTER TABLE student ADD gpa DECIMAL(3,2); 
+
+ALTER TABLE student DROP COLUMN gpa; 
+
+INSERT INTO student(name, major) VALUES('Jack', 'Biology'); 
+INSERT INTO student(name, major) VALUES('Kate', 'Sociology');  
+INSERT INTO student(name, major) VALUES('Claire', 'Chemistry'); 
+INSERT INTO student(name, major) VALUES('Jack', 'Biology'); 
+INSERT INTO student(name, major) VALUES('Mike', 'Computer Science');
+
+SELECT * FROM student ORDER BY major, student_id; 
+
+UPDATE student
+Set major = 'Comp Sci'
+WHERE major = 'Computer Science';
+
+UPDATE student
+Set major = 'Biochem'
+WHERE major = 'Biology' or major = 'Chemistry';
