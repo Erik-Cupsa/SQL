@@ -18,3 +18,14 @@ FROM patients p
 JOIN admissions a 
 ON p.patient_id = a.patient_id 
 WHERE diagnosis = 'Dementia';
+
+
+--Show first_name, last_name, and the total number of admissions attended for each doctor.
+--Every admission has been attended by a doctor.
+
+SELECT d.first_name, d.last_name, COUNT(a.attending_doctor_id)
+FROM doctors d
+JOIN admissions a 
+ON d.doctor_id = a.attending_doctor_id
+GROUP BY d.doctor_id;
+
