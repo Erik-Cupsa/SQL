@@ -29,3 +29,43 @@ JOIN admissions a
 ON d.doctor_id = a.attending_doctor_id
 GROUP BY d.doctor_id;
 
+--For each doctor, display their id, full name, and the first and last admission date they attended.
+
+SELECT d.doctor_id, CONCAT(d.first_name, ' ', d.last_name) AS full_name, MIN(a.admission_date), MAX(a.admission_date) 
+FROM doctors d 
+JOIN admissions a 
+ON d.doctor_id = a.attending_doctor_id
+GROUP BY d.doctor_id;
+
+
+--Display the total amount of patients for each province. Order by descending.
+
+SELECT pr.province_name, COUNT(p.patient_id) AS patient_count 
+FROM patients p 
+JOIN province_names pr 
+ON p.province_id = pr.province_id 
+GROUP BY(p.province_id)
+ORDER BY patient_count DESC;
+
+
+--For every admission, display the patient's full name, their admission diagnosis, and their doctor's full name who diagnosed their problem.
+
+SELECT CONCAT(p.first_name, ' ', p.last_name), a.diagnosis, CONCAT(d.first_name, ' ', d.last_name)
+FROM patients p 
+JOIN admissions a 
+ON a.patient_id = p.patient_id
+JOIN doctors d 
+ON d.doctor_id = a.attending_doctor_id;
+
+
+--Show patient_id, first_name, last_name, and attending doctor's specialty.
+--Show only the patients who has a diagnosis as 'Epilepsy' and the doctor's first name is 'Lisa'
+--Check patients, admissions, and doctors tables for required information.
+
+SELECT p.patient_id, p.first_name, p.last_name, d.specialty
+FROM patients p 
+JOIN admissions a 
+ON a.patient_id = p.patient_id
+JOIN doctors d 
+ON d.doctor_id = a.attending_doctor_id
+WHERE d.first_name = 'Lisa' AND a.diagnosis = 'Epilepsy';
